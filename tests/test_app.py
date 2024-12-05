@@ -1,4 +1,10 @@
 import unittest
+import os
+
+os.makedirs('data', exist_ok=True)
+with open('data/ana.txt', 'w') as f:
+    f.write("Sample text from ana.txt")
+
 from main import app
 
 
