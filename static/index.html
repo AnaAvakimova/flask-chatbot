@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Chatbot</h1>
+        <div id="chatWindow" class="chat-window">
+
+        </div>
+        <textarea id="userMessage" placeholder="Type your message here..."></textarea>
+        <button onclick="sendMessage()">Send</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const message = document.getElementById("userMessage").value;
+
+            const chatWindow = document.getElementById("chatWindow");
+            const userDiv = document.createElement("div");
+            userDiv.className = "user-message";
+            userDiv.innerText = `You: ${message}`;
+            chatWindow.appendChild(userDiv);
+
+            // Scroll to the bottom of the chat window
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: message}),
+            });
+            const data = await response.json();
+
+            // Display the bot's reply in the chat window
+            const botDiv = document.createElement("div");
+            botDiv.className = "bot-message";
+            if (data.reply) {
+                botDiv.innerText = `Bot: ${data.reply}`;
+            } else {
+                botDiv.innerText = "Bot: Something went wrong. Please try again!";
+            }
+            chatWindow.appendChild(botDiv);
+
+            // Scroll to the bottom of the chat window
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            // Clear the input box
+            document.getElementById("message").value = "";
+        }
+    </script>
+</body>
+</html>
