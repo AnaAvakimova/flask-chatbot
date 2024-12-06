@@ -118,6 +118,7 @@ button:hover {
     background: #999;
 }
 
+
 /* Responsive Design */
 @media (max-width: 600px) {
     .container {
