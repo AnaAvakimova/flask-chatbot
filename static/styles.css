@@ -1,104 +1,112 @@
-/* General body styling */
+/* Modern Variables */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --chat-bg: #ffffff;
+    --user-message-bg: #e3f2fd;
+    --bot-message-bg: #f5f5f5;
+    --shadow: 0 2px 5px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --spacing: 20px;
+}
+
+/* Base Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: var(--background-color);
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    line-height: 1.6;
 }
 
-/* Main container */
 .container {
-    width: 400px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 20px;
 }
 
-/* Header styling */
 h1 {
-    font-size: 24px;
-    color: #444;
-    margin-bottom: 20px;
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
 }
 
-/* Textarea styling */
+/* Chat Window Styles */
+.chat-window {
+    background: var(--chat-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    height: 500px;
+    overflow-y: auto;
+    padding: var(--spacing);
+    margin-bottom: var(--spacing);
+}
+
+/* Message Styles */
+.user-message, .bot-message {
+    max-width: 80%;
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    position: relative;
+}
+
+.user-message {
+    background: var(--user-message-bg);
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-message {
+    background: var(--bot-message-bg);
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+}
+
+/* Input Area Styles */
 textarea {
     width: 100%;
-    height: 100px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 14px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: var(--radius);
     resize: none;
-    margin-bottom: 20px;
+    height: 60px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
 }
 
-/* Button styling */
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
 button {
-    background-color: #007BFF;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: var(--radius);
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-/* Chat response area */
-#response {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    text-align: left;
-    font-size: 14px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-/* Chat window styling */
-.chat-window {
-    width: 100%;
-    height: 300px;
-    overflow-y: auto;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-/* User and bot messages */
-.user-message {
-    text-align: right;
-    margin: 5px 0;
-    color: #007BFF;
-}
-
-.bot-message {
-    text-align: left;
-    margin: 5px 0;
-    color: #333;
-}
-
-/* Scrollbar styling */
+/* Scrollbar Styles */
 .chat-window::-webkit-scrollbar {
     width: 8px;
+}
+
+.chat-window::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
 }
 
 .chat-window::-webkit-scrollbar-thumb {
@@ -107,5 +115,21 @@ button:hover {
 }
 
 .chat-window::-webkit-scrollbar-thumb:hover {
-    background: #aaa;
+    background: #999;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+        margin: 1rem auto;
+    }
+
+    .user-message, .bot-message {
+        max-width: 90%;
+    }
+
+    button {
+        width: 100%;
+    }
 }
